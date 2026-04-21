@@ -48,9 +48,9 @@ export class AuthService {
   }
 
   async register(authDto: AuthDto) {
-    if (!authDto.username) {
-      throw new BadRequestException('Username is required');
-    }
+    // if (!authDto.username) {
+    //   throw new BadRequestException('Username is required');
+    // }
 
     const existingUser = await this.dbService.user.findUnique({
       where: { email: authDto.email },
