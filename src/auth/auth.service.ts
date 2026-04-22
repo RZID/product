@@ -3,7 +3,7 @@ import {
   Injectable,
   BadRequestException,
 } from '@nestjs/common';
-import { AuthDto } from './dto/create-auth.dto';
+import { RegisterDto } from './dto/create-auth.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -47,7 +47,7 @@ export class AuthService {
     };
   }
 
-  async register(authDto: AuthDto) {
+  async register(authDto: RegisterDto) {
     // if (!authDto.username) {
     //   throw new BadRequestException('Username is required');
     // }

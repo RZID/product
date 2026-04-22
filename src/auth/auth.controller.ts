@@ -7,7 +7,7 @@ import {
   Get,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto/create-auth.dto';
+import { RegisterDto, LoginDto } from './dto/create-auth.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
@@ -17,13 +17,13 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  register(@Body() dto: AuthDto) {
+  register(@Body() dto: RegisterDto) {
     return this.authService.register(dto);
   }
 
   @UseGuards(AuthGuard('local'))
   @Post('login')
-  async login(@Request() req) {
+  async login(@Body() dto: LoginDto, @Request() req) {
     const token = await this.authService.login(req.user);
 
     return {
